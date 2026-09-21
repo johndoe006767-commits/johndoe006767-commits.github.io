@@ -930,9 +930,9 @@ export function createAnatomyScene(
           const scaledBox = new T.Box3().setFromObject(body);
           const scaledCenter = scaledBox.getCenter(new T.Vector3());
 
-          body.position.x += (0 - scaledCenter.x) - 0.12; 
-          body.position.y += (0.88 - scaledCenter.y) - 0.55; 
-          body.position.z += (-0.08 - scaledCenter.z); 
+          body.position.x += (0 - scaledCenter.x) + 0.18; 
+          body.position.y += (0.88 - scaledCenter.y) + 0.12; 
+          body.position.z += (-0.08 - scaledCenter.z) - 0.05;
 
           scene.add(body);
 
