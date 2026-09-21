@@ -834,14 +834,32 @@ export function createAnatomyScene(
         const size = geometry.boundingBox!.getSize(new T.Vector3());
         geometry.translate(-center.x, -center.y, -center.z);
         const tower = TOWERS.find((t) => t.id === id);
-        const material = new T.MeshPhysicalMaterial({
-          color: id === 'heart' ? '#9e244c' : (tower?.color ?? '#be9e94'),
-          roughness: 0.43,
-          metalness: 0.02,
-          clearcoat: 0.17,
-          envMapIntensity: 0.28,
-          side: T.DoubleSide,
-        });
+        let material;
+        if (id === 'brain') {
+          // Holographic blue medical scan style
+          material = new T.MeshPhysicalMaterial({
+            color: '#001133',
+            emissive: '#00aaff',
+            emissiveIntensity: 0.65,
+            roughness: 0.15,
+            metalness: 0.9,
+            transparent: true,
+            opacity: 0.45,
+            depthWrite: false, 
+            side: T.DoubleSide,
+            clearcoat: 1.0,
+          });
+        } else {
+          // Default style for heart and other organs
+          material = new T.MeshPhysicalMaterial({
+            color: id === 'heart' ? '#9e244c' : (tower?.color ?? '#be9e94'),
+            roughness: 0.43,
+            metalness: 0.02,
+            clearcoat: 0.17,
+            envMapIntensity: 0.28,
+            side: T.DoubleSide,
+          });
+        }
         ownedMaterials.add(material);
         const mesh = new T.Mesh(geometry, material);
         mesh.position.copy(center);
